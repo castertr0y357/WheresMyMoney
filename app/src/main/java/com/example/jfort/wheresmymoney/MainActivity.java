@@ -157,6 +157,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         }
     }//End of onClick
 
+
     void saveInfo() {
         //get moneydetailsml view
         View moneydetailsView = li.inflate(R.layout.moneydetails, null);

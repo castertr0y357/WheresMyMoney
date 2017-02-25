@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_root"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:text="Who owes you money?"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:textSize="22sp"
+        android:textColor="@android:color/black"
+        android:paddingBottom="10sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name: "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textView"
+        android:layout_below="@+id/searchContactsButton"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Search Through Contacts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/searchContactsButton"
+        android:layout_below="@+id/textView2"
+        android:layout_centerVertical="false"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="9dp"
+        android:id="@+id/contactName" />
+
+    <TextView
+        android:text="How much?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contactName"
+        android:layout_marginTop="15dp"
+        android:id="@+id/textView3"
+        android:textSize="22sp"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:text="$"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/dollarAmount"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/textView4"
+        android:textSize="22sp"
+        android:textColor="@android:color/black" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:layout_marginTop="9dp"
+        android:id="@+id/dollarAmount"
+        android:layout_below="@+id/textView3"
+        android:layout_toEndOf="@+id/textView4" />
+
+    <TextView
+        android:text="For:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView5"
+        android:textColor="@android:color/black"
+        android:textSize="22sp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentStart="true"
+        android:id="@+id/moneyPurpose" />
+
+
+</RelativeLayout>

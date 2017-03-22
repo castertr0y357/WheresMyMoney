@@ -10,7 +10,7 @@
         android:text="Who owes you money?"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView2"
+        android:id="@+id/moneyDetail"
         android:textSize="22sp"
         android:textColor="@android:color/black"
         android:paddingBottom="10sp" />
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/searchContactsButton"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/moneyDetail"
         android:layout_centerVertical="false"
         android:layout_centerHorizontal="true" />
 

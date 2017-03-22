@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
@@ -25,6 +27,8 @@ import java.util.Calendar;
 public class MainActivity extends Activity implements View.OnClickListener{
 
     //Declaration of all the different variables, objects, and processes to use goes here
+    //It doesn't have to, but this way it keeps it clean and centralized in case you need to change
+    //or add anything later.
     //Variables
     int contactCounter;
     String contactCounterString;
@@ -36,6 +40,13 @@ public class MainActivity extends Activity implements View.OnClickListener{
     int year;
     String date;
     String dateAdded;
+    int id;
+    String idString;
+    String pictureLocation;
+    String saveInfo;
+    String contactPicture;
+    String borrowedOrLent;
+    String showDetails;
 
 
     //Objects
@@ -73,6 +84,12 @@ public class MainActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_main);
 
         //Variable initialization
+        id = prefs.getInt(idString, 0);
+        Log.i("info", "ID value is initialized to: " + id);
+        if (id < 1){
+            Log.i("info", "Warning! ID is set to 0.  Any previously saved values may be overwritten");
+            Toast.makeText(context, ID is set to zero!  If this is not your first time using this app, data loss can occur!)
+        }
 
         //Object initialization
         iOweSomeoneButton = (Button)findViewById(R.id.iOweSomeoneButton);
@@ -155,35 +172,58 @@ public class MainActivity extends Activity implements View.OnClickListener{
             Intent settings = new Intent(this, SettingsActivity.class);
             startActivity(settings);
         }
+        if (id == R.id.someoneOwesMeButton){
+            saveInfo(1);
+        }
+        if (id == R.id.iOweSomeoneButton){
+            saveInfo(2);
+        }
     }//End of onClick
 
 
-    void saveInfo() {
-        //get moneydetailsml view
+    void saveInfo(int x) {
+
+        //set iborrowedmoneydetails xml page as view source for moneydetailsView
         View moneydetailsView = li.inflate(R.layout.moneydetails, null);
 
-        //set moneydetailsml to alertdialog builder
+        //set moneydetails as view to use
         alertDialogBuilder.setView(moneydetailsView);
 
-        final EditText contactName = (EditText) moneydetailsView.findViewById(R.id.contactName);
-        final EditText dollarAmount = (EditText) moneydetailsView.findViewById(R.id.dollarAmount);
-        final EditText moneyPurpose = (EditText) moneydetailsView.findViewById(R.id.moneyPurpose);
+        final TextView moneyDetailTextView = (TextView) moneydetailsView.findViewById(R.id.moneyDetail);
+        final EditText contactNameEditText = (EditText) moneydetailsView.findViewById(R.id.contactName);
+        final EditText dollarAmountEditText = (EditText) moneydetailsView.findViewById(R.id.dollarAmount);
+        final EditText moneyPurposeEditText = (EditText) moneydetailsView.findViewById(R.id.moneyPurpose);
+
+        if (x == 1){
+            moneyDetailTextView.setText("Who owes you money?");
+        }
+        if (x == 2){
+            moneyDetailTextView.setText("Who do you owe money to?");
+        }
 
         //set dialog message
         alertDialogBuilder.setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                contactNameString = contactName.getText().toString();
+                contactNameString = contactNameEditText.getText().toString();
                 if (contactNameString.equals("")) {
                     contactNameString = "N/A";
                 }
-                saveInfo = date + " " + contactCounterString + " - " + mealInfo;
-                contactCounter = "" + restaurantNumber;
-                editor.putString(counter, saveInfo);
-                editor.putString("mealAmount", mealAmountString);
-                restaurantNumber++;
-                editor.putInt(restaurantCounter, restaurantNumber);
+                Log.i("info", "Contact name is " + contactNameString);
+                amount = Double.parseDouble(dollarAmountEditText.getText().toString());
+                Log.i("info", "Amount is $" + amount);
+                moneyPurposeString = moneyPurposeEditText.getText().toString();
+                Log.i("info", "Money purpose is " + moneyPurposeString);
+                showDetails = "yes";
+                saveInfo = id + "#" + contactNameString + "#" + contactPicture + "#" + borrowedOrLent
+                 + "#" + amount + "#" + moneyPurposeString + "#" + pictureLocation + "#" + date + "#" + showDetails;
+                Log.i("info", "saveinfo string is " + saveInfo);
+                idString = "" + id;
+                editor.putString(idString, saveInfo);
+                editor.putInt(contactCounterString, id);
                 editor.commit();
+                id++;
+                Log.i("info", "ID is now set to: " + id);
             }
         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override

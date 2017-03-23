@@ -38,7 +38,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     int month;
     int day;
     int year;
-    String date;
+    Calendar date;
     String dateAdded;
     int id;
     String idString;
@@ -88,7 +88,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         Log.i("info", "ID value is initialized to: " + id);
         if (id < 1){
             Log.i("info", "Warning! ID is set to 0.  Any previously saved values may be overwritten");
-            Toast.makeText(context, ID is set to zero!  If this is not your first time using this app, data loss can occur!)
+            Toast.makeText(context, "ID is set to zero!  If this is not your first time using this app, data loss can occur!", Toast.LENGTH_LONG );
         }
 
         //Object initialization
@@ -111,7 +111,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         Log.i("info", "Day is " + day);
         year = instant.get(Calendar.YEAR);
         Log.i("info", "Year is " + year);
-        date = "" + month + "/" + day + "/" + year;
+        date = Calendar.getInstance();
         Log.i("info", "Date is " + date);
 
         //Display
@@ -120,6 +120,12 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
         //Views
         li = LayoutInflater.from(context);
+
+        //create loan objects
+        for (int x = 0; x <= id; ++x){
+
+            x = new Loan(id, amount, name, payoffDate, iOwe);
+        }
 
     }//End of onCreate
 
